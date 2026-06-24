@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réclamation — Académie Jaboeuf-Avocat</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      color: #1A1A2E;
+      background: #F7F6F2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #1C2B4A;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 36px 40px;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #1C2B4A;
+      margin-bottom: 6px;
+    }
+
+    .card .subtitle {
+      font-size: 13px;
+      color: #6B7280;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      color: #1C2B4A;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      color: #1A1A2E;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #1C2B4A;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    .required {
+      color: #C0392B;
+      margin-left: 2px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background: #1C2B4A;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background: #C8A84B;
+    }
+
+    button[type="submit"]:disabled {
+      background: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    .info-box {
+      background: #EEF2FF;
+      border-left: 4px solid #1C2B4A;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #1C2B4A;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Confirmation */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .confirmation .check {
+      font-size: 48px;
+      color: #1D6E52;
+      margin-bottom: 16px;
+    }
+
+    .confirmation h3 {
+      font-size: 20px;
+      color: #1C2B4A;
+      margin-bottom: 10px;
+    }
+
+    .confirmation p {
+      font-size: 14px;
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .recap {
+      background: #F0F9F4;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #1D6E52;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    /* Erreur */
+    .error-box {
+      display: none;
+      background: #FEF2F2;
+      border-left: 4px solid #C0392B;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #C0392B;
+      margin-top: 12px;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 24px 20px; }
+      .row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Académie Jaboeuf-Avocat</h1>
+    <p>Formation professionnelle continue en droit du numérique</p>
+  </header>
+
+  <div class="card">
+
+    <!-- Formulaire -->
+    <div id="form-section">
+      <h2>Formulaire de réclamation</h2>
+      <p class="subtitle">
+        Votre réclamation sera traitée dans un délai de <strong>10 jours ouvrés</strong>.
+        Un accusé de réception vous sera adressé par email.
+      </p>
+
+      <div class="info-box">
+        Conformément à notre engagement qualité (RNQ — critère 7), toute réclamation fait l'objet d'un traitement formalisé et d'une réponse écrite motivée.
+      </div>
+
+      <form id="reclamation-form">
+
+        <div class="row">
+          <div class="form-group">
+            <label for="prenom">Prénom <span class="required">*</span></label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+          </div>
+          <div class="form-group">
+            <label for="nom">Nom <span class="required">*</span></label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="votre@email.fr" required>
+        </div>
+
+        <div class="form-group">
+          <label for="objet">Objet de la réclamation <span class="required">*</span></label>
+          <select id="objet" name="objet" required>
+            <option value="" disabled selected>Sélectionnez un objet</option>
+            <option value="Contenu pédagogique">Contenu pédagogique</option>
+            <option value="Accès plateforme">Accès à la plateforme</option>
+            <option value="Certificat ou attestation">Certificat ou attestation</option>
+            <option value="Accompagnement pédagogique">Accompagnement pédagogique</option>
+            <option value="Facturation">Facturation</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description de la réclamation <span class="required">*</span></label>
+          <textarea id="description" name="description" placeholder="Décrivez votre réclamation de manière détaillée..." required></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn">Envoyer ma réclamation</button>
+
+        <div class="error-box" id="error-box">
+          Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement à formation@jaboeuf-avocat.eu.
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Confirmation -->
+    <div class="confirmation" id="confirmation">
+      <div class="check">✓</div>
+      <h3>Réclamation enregistrée</h3>
+      <p>Votre réclamation a bien été reçue et enregistrée.</p>
+      <p>Nous nous engageons à vous répondre dans un délai de <strong>10 jours ouvrés</strong>.</p>
+      <div class="recap" id="recap"></div>
+      <p style="font-size:12px; color:#9CA3AF; margin-top:8px;">Un accusé de réception vous a été envoyé par email.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    Académie Jaboeuf-Avocat &nbsp;·&nbsp; formation@jaboeuf-avocat.eu &nbsp;·&nbsp;
+    Données traitées conformément au RGPD — <a href="https://jaboeuf-avocat.eu" style="color:#1C2B4A;">jaboeuf-avocat.eu</a>
+  </footer>
+
+  <script>
+    const WEBHOOK_URL = 'https://n8n.jaboeuf-avocat.eu/webhook/reclamation';
+
+    document.getElementById('reclamation-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('submit-btn');
+      const errorBox = document.getElementById('error-box');
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+      errorBox.style.display = 'none';
+
+      const data = {
+        prenom:      document.getElementById('prenom').value.trim(),
+        nom:         document.getElementById('nom').value.trim(),
+        email:       document.getElementById('email').value.trim(),
+        objet:       document.getElementById('objet').value,
+        description: document.getElementById('description').value.trim(),
+        submitted_at: new Date().toISOString(),
+        statut:      'recu',
+      };
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        // Afficher confirmation
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+        document.getElementById('recap').innerHTML =
+          `<strong>Objet :</strong> ${data.objet}<br><strong>Email :</strong> ${data.email}`;
+
+      } catch (err) {
+        errorBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Envoyer ma réclamation';
+      }
+    });
+  </script>
+
+</body>
+</html>
